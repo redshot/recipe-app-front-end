@@ -8,6 +8,9 @@ const Layout = ({ children }) => {
         <Link to="/" className="text-light nav-link">Home</Link>
       </li>
       <li className="nav-item">
+        <Link to="/signin" className="text-light nav-link">Signin</Link>
+      </li>
+      <li className="nav-item">
         <Link to="/signup" className="text-light nav-link">Signup</Link>
       </li>
     </ul>
@@ -30,5 +33,6 @@ export default Layout; // we can import this layout component in any page/s sinc
  * - nav() is a function
  * - Link component comes with react-router-dom. It prevents page refresh when the link is clicked
  * - We "to" propert instead of "href" propery for the <Link></Link>
+ * - This file handles the navigation
  * 
  */
