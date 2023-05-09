@@ -32,7 +32,7 @@ const Signin = () => {
       console.log('SIGNIN SUCCESS', response);
       // save the response(user info, token) in the localStorage/cookie
       setValues({...values, name: '', email: '', password: '', buttonText: 'Submitted'}); // change the values
-      toast.success(`Hey ${response.data.user.name}, Welcome back!`);
+      toast.success(`Hey ${response.data.findUser.name}, Welcome back!`);
     })
     .catch(error => {
       console.log('SIGNIN ERROR', error.response.data);
@@ -74,8 +74,8 @@ const Signin = () => {
 export default Signin;
 
 /**
- * - We just need to process email and password for the signin form/page
  * - The codes in this file is based Signup.js
+ * - We just need to process email and password for the signin form/page
  * - This page will make a POST request to http://localhost:8000/api//signin
  *  - The user response which contains the user info and the token will be saved in the localStorage and cookie
  *    - The user info will be saved in the localStorage
