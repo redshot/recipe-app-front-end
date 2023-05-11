@@ -63,6 +63,11 @@ export const isAuth = () => {
   }
 };
 
+export const signout = next => {
+  removeCookie('token');
+  removeLocalStorage('user');
+  next(); // serves as a callback function
+}
 
 /**
  * - This file will help save data in the cookies and localstorage.
@@ -73,7 +78,10 @@ export const isAuth = () => {
  * 
  * - const authenticate = (response, next) => {}
  *  - The methods above and below of export const authenticate = (response, next) => {} are just helper methods
+ *  - This functions takes 2 arguments: response(object) and next(callback function)
  *  - The response argument/parameter is what we get after a successful user signin
+ *    - This object is available after making a successful request to ${process.env.REACT_APP_API}/signin
+ *    - We can see this on Signin.js file
  *  - The next argument can be a callback function
  *  - This is going to work like a middleware
  *  - We can utilize the helper methonds in this file once we get the response

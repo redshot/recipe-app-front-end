@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
+import { authenticate, isAuth } from './Helpers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -31,8 +32,10 @@ const Signin = () => {
     .then(response => {
       console.log('SIGNIN SUCCESS', response);
       // save the response(user info, token) in the localStorage/cookie
-      setValues({...values, name: '', email: '', password: '', buttonText: 'Submitted'}); // change the values
-      toast.success(`Hey ${response.data.findUser.name}, Welcome back!`);
+      authenticate(response, () => {
+        setValues({...values, name: '', email: '', password: '', buttonText: 'Submitted'}); // change the values
+        toast.success(`Hey ${response.data.findUser.name}, Welcome back!`);
+      });
     })
     .catch(error => {
       console.log('SIGNIN ERROR', error.response.data);
@@ -61,8 +64,10 @@ const Signin = () => {
 
   return (
     <Layout>
+    { /*JSON.stringify(isAuth()) */ }
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
+        {isAuth() ? <Navigate to="/" /> : null}
         {/* {JSON.stringify({name, email, password})}*/} {/* We can use this to know the value in the state */}
         <h1 className="p-5 text-center">Signin</h1>
         {signinForm()}
@@ -80,5 +85,6 @@ export default Signin;
  *  - The user response which contains the user info and the token will be saved in the localStorage and cookie
  *    - The user info will be saved in the localStorage
  *    - The token will be saved in a cookie. A cookie is bit more secure when it comes to saving the token
- * 
+ * - {isAuth() ? <Navigate to="/" /> : null} is an if else condition using ternary operand
+ *  - It means if isAuth() is true redirect to home page and if not true just set to null
  */
