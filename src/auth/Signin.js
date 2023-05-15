@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import { authenticate, isAuth } from './Helpers';
@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const Signin = () => {
   const [values, setValues] = useState({
-    email: 'johndoe_testemail_only123@gmail.com',
+    email: 'webninjatricks@gmail.com',
     password: 'rrrrrr',
     buttonText: 'Submit'
   }); // values is an object while setValues is a function
@@ -20,6 +20,8 @@ const Signin = () => {
     console.log('name: ', name);
     setValues({...values, [name]: event.target.value}); // change the values
   }; // a function returning a function
+
+  const navigate = useNavigate();
 
   const clickSubmit = event => {
     event.preventDefault(); // prevents page reload
@@ -34,7 +36,8 @@ const Signin = () => {
       // save the response(user info, token) in the localStorage/cookie
       authenticate(response, () => {
         setValues({...values, name: '', email: '', password: '', buttonText: 'Submitted'}); // change the values
-        toast.success(`Hey ${response.data.findUser.name}, Welcome back!`);
+        // toast.success(`Hey ${response.data.findUser.name}, Welcome back!`);
+        isAuth() && isAuth().role === 'admin' ? navigate('/admin') : navigate('/private'); // redirect after signing in based on role
       });
     })
     .catch(error => {
