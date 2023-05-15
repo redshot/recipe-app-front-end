@@ -5,7 +5,9 @@ import Signup from './auth/Signup';
 import Signin from './auth/Signin';
 import Activate from './auth/Activate';
 import Private from './core/Private';
+import Admin from './core/Admin';
 import PrivateRoute from './auth/PrivateRoute';
+import AdminRoute from './auth/AdminRoute';
 
 const StartingRoutes = () => {
   return (
@@ -16,6 +18,7 @@ const StartingRoutes = () => {
         <Route path="/signin" exact element={<Signin />} />
         <Route path="/auth/activate/:token" exact element={<Activate />} />
         <Route path="/private" element={<PrivateRoute Component={Private} />} />
+        <Route path="/admin" element={<AdminRoute Component={Admin} />} />
       </Routes>
     </BrowserRouter>
   );
