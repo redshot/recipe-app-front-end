@@ -4,6 +4,8 @@ import App from './App';
 import Signup from './auth/Signup';
 import Signin from './auth/Signin';
 import Activate from './auth/Activate';
+import Private from './core/Private';
+import PrivateRoute from './auth/PrivateRoute';
 
 const StartingRoutes = () => {
   return (
@@ -13,6 +15,7 @@ const StartingRoutes = () => {
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/signin" exact element={<Signin />} />
         <Route path="/auth/activate/:token" exact element={<Activate />} />
+        <Route path="/private" element={<PrivateRoute Component={Private} />} />
       </Routes>
     </BrowserRouter>
   );
