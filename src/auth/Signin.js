@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import { authenticate, isAuth } from './Helpers';
