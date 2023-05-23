@@ -98,7 +98,7 @@ const Activate = ({match}) => {
 export default Activate;
 
 /**
- * - The codes in this file is based Signup.js
+ * - The codes in this file is based on Signup.js
  * - Code flow:
  *  - When the component is loaded, we are grabbing the token from the routes/url. We are able to grab the token 
  *    using the {match} props. The JWT token is decoded so we can get the name and set it back to the useState({})

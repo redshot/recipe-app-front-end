@@ -82,7 +82,7 @@ const Signin = () => {
 export default Signin;
 
 /**
- * - The codes in this file is based Signup.js
+ * - The codes in this file is based on Signup.js
  * - We just need to process email and password for the signin form/page
  * - This page will make a POST request to http://localhost:8000/api//signin
  *  - The user response which contains the user info and the token will be saved in the localStorage and cookie

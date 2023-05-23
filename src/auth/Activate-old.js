@@ -108,6 +108,6 @@ const Activate = ({match}) => {
 export default Activate;
 
 /**
- * - The codes in this file is based Signup.js
+ * - The codes in this file is based on Signup.js
  * 
  */
