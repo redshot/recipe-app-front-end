@@ -1,17 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
+import { isAuth, getCookie, signout } from '../auth/Helpers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const Private = () => {
   const [values, setValues] = useState({
     role: '',
-    name: 'John Doe',
-    email: 'johndoe_testemail_only123@gmail.com',
-    password: 'rrrrrr',
+    name: '',
+    email: '',
+    password: '',
     buttonText: 'Submit'
   }); // values is an object while setValues is a function
+
+  const token = getCookie('token');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  const loadProfile = () => { // this function will get user information
+    axios({
+      method: 'GET',
+      url: `${process.env.REACT_APP_API}/user/${isAuth()._id}`,
+      headers: {
+      Authorization: `Bearer ${token}`
+    }
+    })
+    .then(response => {
+      console.log('PRIVATE PROFILE UPDATE', response);
+      const { role, name, email } = response.data;
+      setValues({ ...values, role, name, email });
+    })
+    .catch(error => {
+      console.log('PRIVATE PROFILE UPDATE ERROR', error.response.data.error);
+      if (error.response.status === 401) { // signout and redirect if token is expired
+        signout(() => {
+          navigate('/');
+        });
+      }
+    });
+  };
 
   const {role, name, email, password, buttonText} = values; // destructure
 
@@ -45,7 +77,7 @@ const Private = () => {
     <form>
       <div className="form-group">
         <label className="text-muted">Role</label>
-        <input defaultValue={role} type="text" className="form-control" />
+        <input defaultValue={role} type="text" className="form-control" disabled />
       </div>
 
       <div className="form-group">
@@ -55,7 +87,7 @@ const Private = () => {
 
       <div className="form-group">
         <label className="text-muted">Email</label>
-        <input defaultValue={email} type="email" className="form-control" />
+        <input defaultValue={email} type="email" className="form-control" disabled />
       </div>
 
       <div className="form-group">
@@ -85,6 +117,20 @@ export default Private;
 
 /**
  * - The codes in this file is based on Signup.js
- * - We can use defaultValue or readOnly for <input value={role} type="text" className="form-control" /> and
- *   <input value={email} type="email" className="form-control" />
+ * - Code flow:
+ *  - When the component is loaded, we are grabbing the user info in the database via loadProfile() function
+ *  - We will populate the state using the response data of loadProfile() function via setValues();
+ *  - Note:L The role and email fields are disabled and cannot be updated
+ * 
+ * - useEffect() will run every time there is a change in the state
+ *  - We can pass certain agrguments to make sure the useEffect() runs only when the particular property changes.
+ *  - useEffect() takes a function as the first parameter while the second parameter is an empty array
+ *    - If the second parameter is empty, it means the useEffect() will run every time there is a change in the state
+ *    - We can also pass name in the array: useEffect(() => {}, [name])
+ *      - When the name in the state changes, only then the useEffec() will run.
+ * 
+ * - These three dots are called the spread syntax or spread operator. The spread syntax is a feature of ES6,
+ *   and it’s also used in React.
+ *  - Spread syntax allows you to deconstruct an array or object into separate variables
+ *  - Source: https://sentry.io/answers/react-spread-operator-three-dots/
  */

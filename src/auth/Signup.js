@@ -105,8 +105,10 @@ export default Signup;
  *    - The name is the name of the field(name, email, password) 
  *  - onChange is an event handler in React. It detects when the value of an input element changes.
  * 
- * - The 3 dots/... is a spread arrow operator. It's feature from ES6.
- *  - The spread syntax allows an expression to be expanded in places where multiple arguments or multiple elements are expected.
+ * - These three dots are called the spread syntax or spread operator. The spread syntax is a feature of ES6,
+ *   and it’s also used in React.
+ *  - Spread syntax allows you to deconstruct an array or object into separate variables
+ *  - Source: https://sentry.io/answers/react-spread-operator-three-dots/
  * 
  * - The clickSubmit() function will send the informatiom from the state(name, email, paassword) the backend API
  * 
