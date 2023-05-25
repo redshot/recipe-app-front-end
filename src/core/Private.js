@@ -58,7 +58,7 @@ const Private = () => {
     setValues({...values, buttonText: 'Submitting'});
     axios({
       method: 'PUT',
-      url: `${process.env.REACT_APP_API}/admin/update`, // this endpoint is in our api/backend(mern-auth-server)
+      url: `${process.env.REACT_APP_API}/user/update`, // this endpoint is in our api/backend(mern-auth-server)
       headers: {
         Authorization: `Bearer ${token}`
       },
