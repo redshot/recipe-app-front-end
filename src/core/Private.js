@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
-import { isAuth, getCookie, signout } from '../auth/Helpers';
+import { isAuth, getCookie, signout, updateUser } from '../auth/Helpers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -27,8 +27,8 @@ const Private = () => {
       method: 'GET',
       url: `${process.env.REACT_APP_API}/user/${isAuth()._id}`,
       headers: {
-      Authorization: `Bearer ${token}`
-    }
+        Authorization: `Bearer ${token}`
+      }
     })
     .then(response => {
       console.log('PRIVATE PROFILE UPDATE', response);
@@ -57,18 +57,23 @@ const Private = () => {
     event.preventDefault(); // prevents page reload
     setValues({...values, buttonText: 'Submitting'});
     axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API}/signup`, // this endpoint is in our api/backend(mern-auth-server)
-      data: {name, email, password}
+      method: 'PUT',
+      url: `${process.env.REACT_APP_API}/admin/update`, // this endpoint is in our api/backend(mern-auth-server)
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      data: {name, password}
     })
     .then(response => {
-      console.log('SIGNUP SUCCESS', response);
-      setValues({...values, name: '', email: '', password: '', buttonText: 'Submitted'}); // change the values
-      toast.success(response.data.message);
+      console.log('PRIVATE PROFILE UPDATE SUCCESS', response);
+      updateUser(response, () => {
+        setValues({...values, buttonText: 'Submitted'}); // change the values
+        toast.success('Profile updated successfully!');
+      });
     })
     .catch(error => {
-      console.log('SIGNUP ERROR', error.response.data);
-      setValues({...values, buttonText: 'Submit'}); // change the values
+      console.log('PRIVATE PROFILE UPDATE ERROR', error.response.data.error);
+      setValues({...values, buttonText: 'Submit'});
       toast.error(error.response.data.error);
     });
   };
@@ -120,9 +125,13 @@ export default Private;
  * - Code flow:
  *  - When the component is loaded, we are grabbing the user info in the database via loadProfile() function
  *  - We will populate the state using the response data of loadProfile() function via setValues();
- *  - Note:L The role and email fields are disabled and cannot be updated
+ *  - Note: The role and email fields are disabled and cannot be updated
+ *  - Note: The updateUser() function will be update the information in the localstorage
+ *    so we don't have to sign out then sign in to see updated info in the navbar and localstorage
  * 
  * - useEffect() will run every time there is a change in the state
+ *  - Note: I think useEffect() will run even though there is no change in the state.
+ *    - Hence, useEffect() will run when component mounts, unmounts or renders
  *  - We can pass certain agrguments to make sure the useEffect() runs only when the particular property changes.
  *  - useEffect() takes a function as the first parameter while the second parameter is an empty array
  *    - If the second parameter is empty, it means the useEffect() will run every time there is a change in the state

@@ -112,6 +112,8 @@ export default Activate;
  *  - Save the user
  * 
  * - useEffect() will run every time there is a change in the state
+ *  - Note: I think useEffect() will run even though there is no change in the state.
+ *    - Hence, useEffect() will run when component mounts, unmounts or renders
  *  - We can pass certain agrguments to make sure the useEffect() runs only when the particular property changes.
  *  - useEffect() takes a function as the first parameter while the second parameter is an empty array
  *    - If the second parameter is empty, it means the useEffect() will run every time there is a change in the state

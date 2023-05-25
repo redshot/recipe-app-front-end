@@ -69,6 +69,17 @@ export const signout = next => {
   next(); // serves as a callback function
 }
 
+export const updateUser = (response, next) => {
+  console.log('UPDATE USER IN LOCALSTORAGE HELPERS', response);
+  if (typeof window !== 'undefined') {
+    let auth = JSON.parse(localStorage.getItem('user'));
+    auth = response.data;
+    localStorage.setItem('user', JSON.stringify(auth));
+  }
+
+  next();
+};
+
 /**
  * - This file will help save data in the cookies and localstorage.
  *  - This file will also help authenticate the user
