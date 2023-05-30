@@ -20,7 +20,7 @@ const Admin = () => {
 
   useEffect(() => {
     loadProfile();
-  }, []);
+  }, []); // The empty array [] is an optional dependency. It will run when the component mounds if it is empty
 
   const loadProfile = () => { // this function will get user information
     axios({

@@ -9,6 +9,7 @@ import Admin from './core/Admin';
 import PrivateRoute from './auth/PrivateRoute';
 import AdminRoute from './auth/AdminRoute';
 import Forgot from './auth/Forgot';
+import Reset from './auth/Reset';
 
 const StartingRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const StartingRoutes = () => {
         <Route path="/private" element={<PrivateRoute Component={Private} />} />
         <Route path="/admin" element={<AdminRoute Component={Admin} />} />
         <Route path="/auth/password/forgot" exact element={<Forgot />} />
+        <Route path="/auth/password/reset/:token" exact element={<Reset />} />
       </Routes>
     </BrowserRouter>
   );

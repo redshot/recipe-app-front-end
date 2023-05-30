@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Layout from '../core/Layout';
 import axios from 'axios';
 import { isAuth } from './Helpers';
@@ -73,6 +73,8 @@ const Signup = () => {
         {/* {JSON.stringify({name, email, password})}*/} {/* We can use this to know the value in the state */}
         <h1 className="p-5 text-center">Signup</h1>
         {signupForm()}
+        <br />
+        <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-danger">Forgot Password</Link>
       </div>
     </Layout>
   );

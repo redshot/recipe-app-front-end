@@ -25,7 +25,7 @@ const Activate = ({match}) => {
     if (token) {
       setValues({ ...values, name, token }); // update the state
     }
-  }, []);
+  }, []); // The empty array [] is an optional dependency. It will run when the component mounds if it is empty
 
   const { name, token, show } = values; // destructure
 
