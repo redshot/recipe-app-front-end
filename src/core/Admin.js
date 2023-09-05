@@ -110,7 +110,7 @@ const Admin = () => {
     <Layout>
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
-        <h1 className="pt-5 text-center">Admin</h1>
+        <h1 className="pt-5 text-center">Admin Dashboard</h1>
         <p className="lead text-center">Profile update</p>
         {updateForm()}
       </div>

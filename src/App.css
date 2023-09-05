@@ -1,0 +1,124 @@
+/* GLOBALS */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Montserrat, sans-serif;
+}
+
+button {
+  font-family: Montserrat, sans-serif
+}
+
+.section {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.section.first {
+  margin-top: 50px;
+}
+
+.section h2.title {
+  line-height: 1.2em;
+  margin-bottom: 20px;
+}
+/* GLOBALS */
+
+.tools-list > .item {
+  text-align: initial;
+}
+
+/* ADD NEW RECIPE */
+.recipe-form-input {
+  color: #000;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  line-height: 18px;
+  padding: 12px;
+  height: auto;
+}
+
+.recipe-form-input:focus, .recipe-form-textarea:focus {
+  outline: none;
+  border-color: #ddd;
+  box-shadow: none;
+}
+
+.recipe-form-textarea {
+  border-radius: 0;
+  min-height: 100px;
+}
+
+.btn-submit {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #4681f4;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 12px;
+  transition: 0.3s;
+  display: block;
+  margin: 20px auto 0;
+  width: 100%;
+  max-width: 180px;
+}
+
+.btn-submit:hover {
+  background-color: #55c2da;
+}
+
+.btn-submit:focus {
+  background-color: #55c2da;
+  border-color: initial;
+  box-shadow: none;
+}
+/* ADD NEW RECIPE */
+
+.all-recipes-list {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.all-recipes-list > .wrapper {
+  flex-basis: 24.7%;
+  margin-bottom: 20px;
+  padding-left: 0.35vw;
+  padding-right: 0.35vw;
+}
+
+.all-recipes-list > .wrapper .image {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.all-recipes-list > .wrapper .link {
+  color: #212529;
+  transition: 0.3s;
+}
+
+.all-recipes-list > .wrapper .link:hover {
+  color: #6c757d;
+  text-decoration: none;
+  transform: 0.3s;
+}
+
+.all-recipes-list > .wrapper .title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .all-recipes-list {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+}
