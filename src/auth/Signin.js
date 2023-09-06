@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const Signin = () => {
   const [values, setValues] = useState({
-    email: 'webninjatricks@gmail.com',
-    password: 'rrrrrr',
+    email: '',
+    password: '',
     buttonText: 'Submit'
   }); // values is an object while setValues is a function
 
